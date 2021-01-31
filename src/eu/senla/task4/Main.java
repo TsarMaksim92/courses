@@ -8,10 +8,12 @@ package eu.senla.task4;
 Провести все необходимые преобразования.
 Про преобразования почитать. String.valueOf(), Double.parseDouble().
 3. Если элемент является строкой, то взять из неё со 2 по 4 элемент и положить в SB и просто вывести на экран через запятую.
-4. Если же числом, то нужно округлить каждое число. Если 1,7 и больше то в большую сторону, если меньше то в меньшую сторону).
+4. Если же числом, то нужно округлить каждое число. Если *,7 и больше то в большую сторону, если меньше то в меньшую сторону).
 После положить числа в массив и этот массив вывести на экран через знак подчеркивание.
 5. Также вывести на экран первоначальную матрицу.
  */
+
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,10 +21,9 @@ public class Main {
         String[][] array = helper.matrix(10,10);
         System.out.println("п.2 задания\n\rДиагонали равны? - " + helper.compareDiagonal(helper.getMainDiagonal(array), helper.getSideDiagonal(array)));
         String[] str = helper.getGeneralArray(helper.getMainDiagonal(array), helper.getSideDiagonal(array));
+        helper.printMatrix(array);
         System.out.println("п.3 задания\n\r" + helper.getString(str));
         System.out.println("п.4 задания\n\r" + helper.getStringNumber(str));
         System.out.println("п.5 задания");
-        helper.printMatrix(array);
-
     }
 }

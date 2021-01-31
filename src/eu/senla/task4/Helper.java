@@ -21,10 +21,10 @@ public class Helper {
 
     //метод генерирует случайную строку размером 6 символов
     public String getRandomStr () {
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //26 character (index 0-25)
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //52 character (index 0-51)
         String str = "";
         for (int index = 0; index < 6; index++) {
-            str = str + alphabet.charAt((int)(Math.random()*26));
+            str = str + alphabet.charAt((int)(Math.random()*52));
         }
         return str;
     }
@@ -76,20 +76,39 @@ public class Helper {
     //метод выводит строку в консоль согласно п.3 задания
     public StringBuilder getString (String[] generalArray){
         StringBuilder stringBuilder = new StringBuilder();
+        int sizeArrayString = 0;
         for (String str : generalArray) {
             if (Character.isLetter(str.charAt(0))) {
-                stringBuilder.append(str.substring(1,4));
-                stringBuilder.append(",");
+                ++sizeArrayString;
             }
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        String[] arrayString = new String[sizeArrayString];
+        int index = 0;
+        for (String str : generalArray) {
+            if (Character.isLetter(str.charAt(0))) {
+                arrayString[index] = str.substring(1,4);
+                ++index;
+            }
+        }
+        for (String str : arrayString) {
+            stringBuilder.append(str + ", ");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-2);
         return stringBuilder;
     }
 
     //метод выводит строку в консоль согласно п.4 задания
     public StringBuilder getStringNumber (String[] generalArray) {
         StringBuilder stringBuilder = new StringBuilder();
+        int sizeArrayDouble = 0;
+        for (String str : generalArray) {
+            if (Character.isDigit(str.charAt(0))) {
+                ++sizeArrayDouble;
+            }
+        }
         double numberTemp;
+        Double[] arrayDouble = new Double[sizeArrayDouble];
+        int index = 0;
         for (String number : generalArray){
             if (Character.isDigit(number.charAt(0))) {
                 numberTemp = Double.parseDouble(number);
@@ -98,9 +117,12 @@ public class Helper {
                 } else {
                     numberTemp = Math.floor(numberTemp);
                 }
-                stringBuilder.append(numberTemp);
-                stringBuilder.append("_");
+                arrayDouble[index] = numberTemp;
+                ++index;
             }
+        }
+        for (double number : arrayDouble) {
+            stringBuilder.append(number + "_");
         }
         stringBuilder.deleteCharAt(stringBuilder.length()-1);
         return stringBuilder;
