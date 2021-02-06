@@ -4,21 +4,21 @@ import java.util.Locale;
 
 public class Rainbow {
     //colors font
-    public static final String ANSI_RESET = "\033[0m";
-    public static final String ANSI_RED = "\033[0;31m";
-    public static final String ANSI_ORANGE = "\033[1;33m"; //поискать оранжевый цвет
-    public static final String ANSI_YELLOW = "\033[2;33m";
-    public static final String ANSI_GREEN = "\033[0;32m";
-    public static final String ANSI_CYAN = "\033[0;36m";
-    public static final String ANSI_BLUE = "\033[0;34m";
-    public static final String ANSI_PURPLE = "\033[0;35m";
-    public static final int RED = 1;
-    public static final int ORANGE = 2;
-    public static final int YELLOW = 3;
-    public static final int GREEN = 4;
-    public static final int CYAN = 5;
-    public static final int BLUE = 6;
-    public static final int PURPLE = 7;
+    private static final String ANSI_RESET = "\033[0m";
+    private static final String ANSI_RED = "\033[0;31m";
+    private static final String ANSI_ORANGE = "\033[1;33m"; //поискать оранжевый цвет
+    private static final String ANSI_YELLOW = "\033[2;33m";
+    private static final String ANSI_GREEN = "\033[0;32m";
+    private static final String ANSI_CYAN = "\033[0;36m";
+    private static final String ANSI_BLUE = "\033[0;34m";
+    private static final String ANSI_PURPLE = "\033[0;35m";
+    private static final int RED = 1;
+    private static final int ORANGE = 2;
+    private static final int YELLOW = 3;
+    private static final int GREEN = 4;
+    private static final int CYAN = 5;
+    private static final int BLUE = 6;
+    private static final int PURPLE = 7;
 
     public String rainbow (int number) {
         String result = "";
@@ -52,7 +52,7 @@ public class Rainbow {
         return changedEnding(rainbow(number1)) + "-" + rainbow(number2).toLowerCase();
     }
 
-    public String changedEnding (String str) {
+    private String changedEnding (String str) {
         if (str.indexOf("ый") > 0) {
             return str.replace("ый", "о");
         } else if (str.indexOf("ой") > 0) {

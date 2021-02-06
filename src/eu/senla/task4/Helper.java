@@ -20,7 +20,7 @@ public class Helper {
     }
 
     //метод генерирует случайную строку размером 6 символов
-    public String getRandomStr () {
+    private String getRandomStr () {
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //52 character (index 0-51)
         String str = "";
         for (int index = 0; index < 6; index++) {
@@ -30,7 +30,7 @@ public class Helper {
     }
 
     //метод генерирует дабл размером 6 символов "1,2345"
-    public String getRandomDouble () {
+    private String getRandomDouble () {
         String number = "0123456789"; //10 character
         String str = number.charAt((int)(Math.random()*10)) + ".";
         for (int index = 0; index < 4; index++) {
