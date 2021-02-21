@@ -20,6 +20,7 @@ import eu.senla.task5.containers.*;
      */
 public class Main {
     // лень придумывать! всё рандомно (в пределах условий задания)
+    //
     public static void main(String[] args) {
         Port port = new Port(10); //создаем порт с 10 кораблями
         Ship ship;
@@ -27,7 +28,7 @@ public class Main {
         Container container;
         //цикл заполняет порт кораблями
         do {
-            ship = new Ship((int) (Math.random()*2) + 1); //рандомное количество палуб на корабле
+            ship = new Ship((int) (Math.random()*2) + 1); //рандомное количество палуб на корабле (1 или 2)
             //цикл заполняет корабль палубами
             do {
                 deck = new Deck(((int) (Math.random()*2) + 1)*2); //рандомное количество контейнеров на палубе (2 больших или 4 маленьких)
