@@ -8,7 +8,7 @@ public class Square extends Container {
     }
 
     //возращает массу воды в контейнере
-    public int getMass () {
+    public int getMass() {
         mass = (int) (Math.pow(diagonal, 2) / 2 * this.height * this.density);
         return mass;
     }

@@ -7,11 +7,35 @@ public abstract class Container implements ContainerImpl {
     int density;
     int mass;
 
-    public Container(int size) {
+    public Container(int size) { //дефолный контейнер высота - 10, плотность - 1000
         this.size = size;
         this.diagonal = getDiagonal();
-        this.height = getHeight();
-        this.density = getDensity();
+        this.height = 10;
+        this.density = 1000;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        if (height >= 10 && height<=100) {
+            this.height = height;
+        } else {
+            System.out.println("Incorrect value height! (10...100)");
+        }
+    }
+
+    public int getDensity() {
+        return density;
+    }
+
+    public void setDensity(int density) {
+        if (density == 1000 || density ==2000) {
+            this.density = density;
+        } else {
+            System.out.println("Incorrect value density! (1000 or 2000)");
+        }
     }
 
     public abstract int getMass(); //возращает массу воды в контейнере
@@ -22,24 +46,10 @@ public abstract class Container implements ContainerImpl {
             diagonal = 10;
         } else if (this.size == 2) {
             diagonal = 20;
+        } else {
+            return 0;
         }
         return diagonal;
-    }
-
-    //рандомно возвращает высоту контейнера (от 10 до 100)
-    public int getHeight() {
-        height = (int) (10 + Math.random()*90);
-        return height;
-    }
-
-    //рандомно возвращает плотность воды (1000 или 2000)
-    public int getDensity() {
-        if ((int) (Math.random()*2) == 0) {
-            density = 1000;
-        } else {
-            density = 2000;
-        }
-        return density;
     }
 
     public String toString () {

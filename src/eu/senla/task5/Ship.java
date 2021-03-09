@@ -5,7 +5,15 @@ public class Ship {
     private int count = 0;
 
     public Ship (int number) { //number 1 или 2 палубы
-        decks = new Deck[number];
+        decks = new Deck[setNumberOfDecks(number)];
+    }
+
+    public int setNumberOfDecks(int number) {
+        if (number == 1 || number ==2) {
+            return number;
+        } else {
+            return 0;
+        }
     }
 
     //метод добавляет палубу на корабль
@@ -19,12 +27,16 @@ public class Ship {
         }
     }
 
-    private int getMass () {
+    private int calculationMass() {
         int mass = 0;
         for (Deck deck : decks) {
-            mass += deck.getMass();
+            mass += deck.calculationMass();
         }
         return mass;
+    }
+
+    public int getMass() {
+        return calculationMass();
     }
 
     @Override
@@ -37,7 +49,7 @@ public class Ship {
         }
         sb.setLength(sb.length()-2);
         sb.append("]\n\r");
-        sb.append("Weight of transported water = " + this.getMass());
+        sb.append("Weight of transported water = " + this.calculationMass());
         return sb.toString();
     }
 }

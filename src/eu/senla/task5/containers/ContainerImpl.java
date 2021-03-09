@@ -6,4 +6,5 @@ public interface ContainerImpl {
     int getDensity();
     int getMass ();
     String toString ();
+
 }

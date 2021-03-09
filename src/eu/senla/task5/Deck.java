@@ -7,7 +7,16 @@ public class Deck {
     private int count = 0;
 
     public Deck (int number) { //количество контейнеров на палубе 2 или 4
-        containers = new Container[number];
+        containers = new Container[setNumberOfContainers(number)];
+    }
+
+
+    public int setNumberOfContainers(int number) {
+        if (number == 2 || number ==4) {
+            return number;
+        } else {
+            return 0;
+        }
     }
 
     //метод добавляет сонтейнер на палубу
@@ -21,6 +30,16 @@ public class Deck {
         }
     }
 
+    public int calculationMass() {
+        int mass = 0;
+        for (Container cont : containers) {
+            mass += cont.getMass();
+        }
+        return mass;
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -31,13 +50,5 @@ public class Deck {
         sb.setLength(sb.length()-2);
         sb.append("]");
         return sb.toString();
-    }
-
-    public int getMass () {
-        int mass = 0;
-        for (Container cont : containers) {
-            mass += cont.getMass();
-        }
-        return mass;
     }
 }
