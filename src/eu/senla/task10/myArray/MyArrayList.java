@@ -1,9 +1,13 @@
-package eu.senla.task8.myArray;
+package eu.senla.task10.myArray;
+
+import eu.senla.task10.NewExceedingNumberOfCharacters;
+import eu.senla.task10.NewIndexOutOfBoundsException;
+import eu.senla.task10.NewNegativeArraySizeException;
 
 import java.util.Arrays;
 import java.util.ListIterator;
 
-public class MyArrayList<T> implements MyList<T>{
+public class MyArrayList<T> implements MyList<T> {
 
     private int size; //количество элементов
     private int capacity = 10; //размер массива
@@ -32,7 +36,9 @@ public class MyArrayList<T> implements MyList<T>{
         }
     }
 
-    public void add(int index, T obj) {
+    public void add(int index, T obj) throws Exception{
+        checkIndex(index);
+        checkObject(obj);
         if (index == myArray.length-1) {
             myArray = Arrays.copyOf(myArray, index + 1);
             myArray[index] = obj;
@@ -46,26 +52,20 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
 
-    public boolean addAll(int index, MyList<? extends T> col) {
+    public boolean addAll(int index, MyList<? extends T> col) throws Exception {
         Object[] tempCol = col.toArray();
         int x = tempCol.length;
-        if (index <= myArray.length && index >= 0) {
-            for (int i = 0; i < tempCol.length; i++) {
+        checkIndex(index);
+        for (int i = 0; i < tempCol.length; i++) {
                 this.add(index,(T) tempCol[i]);
                 index++;
             }
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
-    public T get (int index) {
-        if (index < myArray.length && index >= 0) {
-            return (T) myArray[index];
-        } else {
-            return null;
-        }
+    public T get (int index) throws NewNegativeArraySizeException, NewIndexOutOfBoundsException {
+        checkIndex(index);
+        return (T) myArray[index];
     }
 
     public int indexOf (Object obj) {
@@ -90,6 +90,7 @@ public class MyArrayList<T> implements MyList<T>{
     public ListIterator<T> listIterator() {
         return new MyListIterator();
     }
+
     private class MyListIterator<T> implements ListIterator<T> {
         int size = MyArrayList.this.size;
         int currentPointer = 0;
@@ -99,7 +100,6 @@ public class MyArrayList<T> implements MyList<T>{
         public boolean hasNext() {
             return (currentPointer<size);
         }
-
         @Override
         public T next() {
             if(!hasNext()){
@@ -109,47 +109,35 @@ public class MyArrayList<T> implements MyList<T>{
             currentPointer +=1;
             return val;
         }
-
         @Override
         public boolean hasPrevious() {
             return (lastPointer>=0);
         }
-
         @Override
         public T previous() {
             if(!hasPrevious()){
                 System.out.println("Out of bounds");
             }
-
             T val = (T) myArray[lastPointer];
             lastPointer-=1;
             return val;
         }
-
         @Override
         public int nextIndex() {
             return 0;
         }
-
         @Override
         public int previousIndex() {
             return 0;
         }
-
         @Override
         public void remove() {
-
         }
-
-
         @Override
         public void set(T t) {
-
         }
-
         @Override
         public void add(T t) {
-
         }
     }
 
@@ -169,13 +157,11 @@ public class MyArrayList<T> implements MyList<T>{
         }
     }
 
-    public T set (int index, T obj) {
-        if (index < myArray.length && index >= 0) {
-            myArray[index] = obj;
-            return (T) myArray[index];
-        } else {
-            return null;
-        }
+    public T set (int index, T obj) throws NewNegativeArraySizeException, NewIndexOutOfBoundsException, NewExceedingNumberOfCharacters {
+        checkIndex(index);
+        checkObject(obj);
+        myArray[index] = obj;
+        return (T) myArray[index];
     }
 
     public void sort(MyComparator<? super T> comp) {
@@ -198,7 +184,9 @@ public class MyArrayList<T> implements MyList<T>{
         }
     }
 
-    public MyList<T> subList (int start, int end) {
+    public MyList<T> subList (int start, int end) throws Exception{
+        checkIndex(start);
+        checkIndex(end);
         MyList temp = new MyArrayList<T>(1);
         for (int i = start, j=0; i < end; i++, j++) {
             temp.add(j, myArray[i]);
@@ -225,6 +213,14 @@ public class MyArrayList<T> implements MyList<T>{
         return index;
     }
 
+    private void checkIndex(int index) throws NewIndexOutOfBoundsException,NewNegativeArraySizeException {
+        if (index < 0) throw new NewNegativeArraySizeException("Индекс имеет отрицательное значение");
+        if (index > myArray.length) throw new NewIndexOutOfBoundsException("Индекс за пределами массива");
+    }
+
+    private void checkObject(T obj) throws NewExceedingNumberOfCharacters {
+        if (obj.toString().length() > 7) throw new NewExceedingNumberOfCharacters("Объект превышает предусмотренное количество символов (7)");
+    }
 
     public String toString () {
         StringBuilder str = new StringBuilder();
