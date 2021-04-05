@@ -57,32 +57,44 @@ public class Main {
                     proccesingList(goodList);
                     FileWriter fw = new FileWriter(fileGoods, false);
                     for (int i = 0; i < goodList.size(); i++) {
-
-                    };
+                        Good g = (Good) goodList.get(i);
+                        String s = g.getId()+"/"+g.getName()+"/"+getDateReverse(g.getDate())+"\n";
+                        fw.write(s);
+                    }
+                    fw.close();
                 } else if ("2".equals(mode)) {
                     proccesingList(orderList);
+                    FileWriter fw = new FileWriter(fileOrder, false);
+                    for (int i = 0; i < orderList.size(); i++) {
+                        Order o = (Order) orderList.get(i);
+                        String s = o.getId()+"/"+getDateReverse(o.getDate())+"/"+o.getIdFirst()+"/"+o.getIdSecond()+"\n";
+                        fw.write(s);
+                    }
+                    fw.close();
                 } else if ("0".equals(mode)) {
                     break;
                 } else {
                     break;
                 }
             }
-
             //закрытие потоков
             scan.close();
             scanGood.close();
             scanOrder.close();
-          //  fw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
     //метод получает дату в формате гггг-мм-дд
     private static LocalDate getDate(String date) {
         String[] split = date.split("-");
         return LocalDate.of(Integer.parseInt(split[2]), Integer.parseInt(split[1]), Integer.parseInt(split[0]));
+    }
+
+    //метод преобразовывает LocalDate в строку формата "дд-мм-гггг"
+    private static String getDateReverse(LocalDate date) {
+        String str = date.getDayOfMonth()+"-"+date.getMonthValue()+"-"+date.getYear();
+        return str;
     }
 
     //метод принимает с консоли команды и обрабатывает коллекцию товаров или заказов

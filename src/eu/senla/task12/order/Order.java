@@ -15,6 +15,22 @@ public class Order {
         this.idSecond = idGood2;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getIdFirst() {
+        return idFirst;
+    }
+
+    public int getIdSecond() {
+        return idSecond;
+    }
+
     @Override
     public String toString() {
         return "Order{" +

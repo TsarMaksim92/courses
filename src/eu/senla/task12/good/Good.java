@@ -13,6 +13,18 @@ public class Good {
         this.date = date;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "Good{" +
